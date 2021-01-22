@@ -1,0 +1,13 @@
+@charset "utf-8";
+
+//colors
+@import "partials/_color.scss";
+
+//Bulma
+@import "~bulma/bulma";
+
+//Import fontawesome
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts'; 
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss"; 
+
