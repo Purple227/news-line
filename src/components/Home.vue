@@ -3,7 +3,7 @@
 
   <div class="home"> <!-- Home tag open -->
 
-    <div class="field has-addons has-addons-right">
+    <div class="field has-addons has-addons-right" >
       <p class="control" @click="displayToggle = 'card' ">
         <button class="button">
           <span class="icon is-small">
@@ -12,7 +12,7 @@
           <span class="is-bold"> Card </span>
         </button>
       </p>
-      <p class="control" @click="displayToggle = 'list' ">
+      <p class="control" @click="displayToggle = 'list' " >
         <button class="button">
           <span class="icon is-small">
             <i class="fas fa-list has-text-primary"></i>
@@ -23,64 +23,66 @@
     </div>
 
 
-    <div class="box" v-if="displayToggle == 'list'"> <!-- Box tag open -->
+
+<div v-if="displayToggle == 'list'">
+    <div class="box" v-for="(news, index) in news" :key="index"> <!-- Box tag open -->
       <div class="columns"> <!-- Columns wrapper tag open -->
 
         <div class="column is-3">
           <figure class="image is-128x128">
-            <img class="" src="https://bulma.io/images/placeholders/128x128.png">
+            <img class="" :src="news.urlToImage">
           </figure>
         </div>
 
         <div class="column">
           <div class="content">
             <p class="is-inline">
-              <strong class="title is-4">John Smith</strong> <small>31m</small>
+              <strong class="title is-4"> By {{ news.author == null ? 'Anonymous' : news.author }}</strong> 
               <br>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
+              {{ news.title }}
             </p>
+
+                      <br>
+          <time :datetime="news.publishedAt"> {{ news.publishedAt | format('D MMM YYYY - h:mm A')}} </time>
+
             <p class="buttons is-inline is-pulled-right">
-              <button class="button  mt-4">
+              <a :href="news.url" class="button  mt-4">
                 <span class="icon is-small">
                   <i class="fas fa-arrow-right has-text-primary"></i>
                 </span>
-              </button>
+              </a>
             </p>
           </div>
         </div>
 
       </div> <!-- Columns wrapper tag close -->
-
-
     </div> <!-- Box tag close -->
+  </div>
 
 
 
 
-    <div class="card" v-if="displayToggle == 'card'">
+<div v-if="displayToggle == 'card'" >
+    <div class="card m-4" v-for="(news, index) in news" :key="index">
       <div class="card-image">
         <figure class="image is-3by1">
-          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+          <img :src="news.urlToImage" alt="Placeholder image">
         </figure>
       </div>
       <div class="card-content">
 
         <div class="content">
-          <p class="title is-4">John Smith</p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Phasellus nec iaculis mauris gfyfuyuy uguiguigiu. <a>@bulmaio</a>.
-          <a href="#">#css</a> <a href="#">#responsive</a>
+          <p class="title is-4"> By {{ news.author == null ? 'Anonymous' : news.author }} </p>
+          {{ news.title }}
           <br>
-          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+          <time datetime="2016-1-1"> {{ news.publishedAt | format('D MMM YYYY - h:mm A')}} </time>
         </div>
       </div>
-
       <footer class="card-footer">
-        <a href="#" class="card-footer-item"> <i class="fas fa-arrow-right has-text-primary"></i> </a>
+        <a :href="news.url" class="card-footer-item"> <i class="fas fa-arrow-right has-text-primary"></i> </a>
       </footer>
-
     </div>
-
+</div>
 
 
 
@@ -110,14 +112,37 @@ export default {
     this.getNews()
   },
 
+  mounted() {
+    this.scroll()
+  },
+
+
   methods: {
 
     getNews() {
       this.axios
-      .get("https://newsapi.org/v2/everything?q=bitcoin&apiKey=40a327d7b91545b68baaef920b3ae85f").then((response) => {
+      .get(`https://newsapi.org/v2/everything?q=bitcoin?&sortBy=publishedAt&pageSize=3&apiKey=40a327d7b91545b68baaef920b3ae85f`).then((response) => {
         this.news = response.data.articles
       })
     },
+
+
+  scroll () {
+    let number = 3
+    window.onscroll = () => {
+      let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+
+      if (bottomOfWindow == false) {
+      this.axios
+      .get(`https://newsapi.org/v2/everything?q=bitcoin?&sortBy=publishedAt&pageSize=${number ++}&apiKey=40a327d7b91545b68baaef920b3ae85f`).then((response) => {
+        let allNews = response.data.articles
+         this.news = allNews
+      })
+
+      }
+    };
+  },
+
 
 },//Method calibrace closes
 
@@ -127,3 +152,64 @@ export default {
 
 }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

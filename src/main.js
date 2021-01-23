@@ -10,6 +10,14 @@ import "./style/app.scss";
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
+import moment from 'moment'
+Vue.prototype.moment = moment
+//Vue.use(require('vue-moment'));
+Vue.filter('format', function (value, display) {
+  if (!value) return ''
+  return moment(value).format(display);
+})
+
 //routes
 import routes from './routes';
 const router = new VueRouter
@@ -24,4 +32,5 @@ Vue.config.productionTip = false
 new Vue({
   render: h => h(App),
   router,
+
 }).$mount('#app')
