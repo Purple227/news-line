@@ -1,23 +1,36 @@
 
 <template>
 
-  <div id="app" class="container">
 
+<div class="body">
 
-    <Home/>
+  <div id="app" class="container"> <!-- Container tag open -->
 
+<div class="columns"> <!-- Columns wrapper tag open -->
 
+  <div class="column">
+    <Sidebar/>
   </div>
+
+  <div class="column">
+    <router-view/>
+  </div>
+
+</div> <!-- Columns wrapper tag close -->
+
+  </div> <!-- Container tag close -->
+
+</div>
 
 </template>
 
 <script>
-import Home from './components/Home.vue'
+import Sidebar from './components/partials/Sidebar.vue'
 
 export default {
   name: 'App',
   components: {
-    Home
+    Sidebar
   }
 }
 </script>

@@ -3,6 +3,9 @@
 //colors
 @import "partials/_color.scss";
 
+//responsivenss
+@import "partials/_responsiveness.scss";
+
 //Bulma
 @import "~bulma/bulma";
 
@@ -11,3 +14,21 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
 @import "~@fortawesome/fontawesome-free/scss/solid.scss"; 
 
+
+.body
+{
+	padding: 50px;
+	@include mobile {
+		padding: 10px;
+	}
+}
+
+.home
+{
+	padding: 10px;
+}
+
+.container 
+{
+	background-color: $dark-grey;
+}
