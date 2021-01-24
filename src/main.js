@@ -5,6 +5,9 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 Vue.use(VueAxios, axios)
 
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
+
 import "./style/app.scss";
 
 import VueRouter from 'vue-router';
@@ -17,6 +20,7 @@ Vue.filter('format', function (value, display) {
   if (!value) return ''
   return moment(value).format(display);
 })
+
 
 //routes
 import routes from './routes';

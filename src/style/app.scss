@@ -6,6 +6,9 @@
 //responsivenss
 @import "partials/_responsiveness.scss";
 
+//reuse code
+@import "partials/_reuse.scss";
+
 //Bulma
 @import "~bulma/bulma";
 
@@ -28,7 +31,18 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	padding: 10px;
 }
 
+.sidebar
+{
+	margin-top: 60px;
+	padding: 100px;
+}
+
 .container 
 {
 	background-color: $dark-grey;
+}
+
+.fixed
+{
+  @include position(0px, fixed);
 }

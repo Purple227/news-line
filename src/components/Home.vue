@@ -3,6 +3,11 @@
 
   <div class="home"> <!-- Home tag open -->
 
+
+<div v-if="auth"> <!-- AuthWrapper -->
+
+
+
     <div class="field has-addons has-addons-right" >
       <p class="control" @click="displayToggle = 'card' ">
         <button class="button">
@@ -84,13 +89,22 @@
     </div>
 </div>
 
+</div> <!-- AuthWrapper -->
 
 
 
 
+<div class="sidebar" v-else> <!-- Unauthenticated section -->
 
+    <div class="card">
+    <div class="card-content">
+      <div class="content is-bold has-text-centered subtitle">
+        <span class="fa"> Please login to gain access to news line. </span>
+      </div>
+    </div>
+  </div>
 
-
+</div>
 
   </div> <!-- Home tag close -->
 
@@ -100,6 +114,7 @@
 export default {
   name: 'Home',
 
+props: ['auth'],
 
   data() {
     return{
@@ -145,9 +160,6 @@ export default {
 
 
 },//Method calibrace closes
-
-
-
 
 
 }
