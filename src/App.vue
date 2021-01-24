@@ -41,16 +41,15 @@ export default {
         password: 111111,
       },
 
-      authStatus: false,
+      authStatus: null,
 
     }
   },
 
-  beforeMount()
+  mounted()
   {
     window.localStorage.setItem("user", JSON.stringify(this.dummyUser)); //store dummy user
-    this.dummyUser = JSON.parse(window.localStorage.getItem("user")); //get them back
-    this.authStatus = window.localStorage.getItem('authStatus');
+    this.authStatus = window.localStorage.getItem('authStatus') 
   }
 
 
